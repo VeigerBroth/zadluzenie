@@ -9,23 +9,34 @@ inflation_value = [1.59282448436825, -0.453509101198007, 2.32467171712441,
 month = ['styczniu', 'lutym', 'marcu', 'kwietniu', 'maju', 'czerwcu', 'lipcu',
 'sierpniu', 'wrześniu', 'październiku', 'listopadzie', 'grudniu']*2
         
-def enter_value(input_message, error_message, input_type_convertion):
+def enter_value(input_message, error_message, input_type_convertion='string'):
+    """ Create input with instant checker value.
+
+    enter_value(input_message, error_message [,input_type_convertion])
+    input_type_convertion - if not supplied - string type value input
+    
+    """
+    
     while True:
         try:
-            if input_type_convertion is int:
+            if input_type_convertion == 'string':
+                enter_value = input(input_message)
+                break
+            elif input_type_convertion == int:
                 enter_value = int(input(input_message))
                 break
-            elif input_type_convertion is float:
+            elif input_type_convertion == float:
                 enter_value = float(input(input_message))
                 break
         except:
             print(error_message)
             
     return enter_value
-            
+    
 credit = enter_value('Podaj początkową wartość kredytu: ', 'Niepoprawna wartość wysokości kredytu!', float)
 percent = enter_value('Podaj wysokość oprocentowania: ', 'Niepoprawna wartość wysokości oprocentowania!', float)
 installment = enter_value('Podaj wartość raty: ', 'Niepoprawna wartość wysokości raty!', float)
+
 
 for i in range(24):
    calc = (1+((inflation_value[i]+percent)/1200))*credit-installment
